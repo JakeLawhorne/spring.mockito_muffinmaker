@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(value = "/baker")
+@RequestMapping(value = "/bakers")
 public class BakerController {
     private BakerService service;
 
@@ -23,13 +23,13 @@ public class BakerController {
         return new ResponseEntity<>(service.index(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/read/{id}")
-    public ResponseEntity<Baker> show(Long id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Baker> show(@PathVariable Long id) {
         return new ResponseEntity<>(service.show(id), HttpStatus.OK);
     }
 
-    @PostMapping(value="/create")
-    public ResponseEntity<Baker> create(Baker baker) {
+    @PostMapping
+    public ResponseEntity<Baker> create(@RequestBody Baker baker) {
         return new ResponseEntity<>(service.create(baker), HttpStatus.CREATED);
     }
 
